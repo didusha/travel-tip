@@ -6,6 +6,7 @@ window.onload = onInit
 
 var gUserPos
 
+
 // To make things easier in this project structure 
 // functions that are called from DOM are defined on a global app object
 window.app = {
@@ -18,6 +19,7 @@ window.app = {
     onShareLoc,
     onSetSortBy,
     onSetFilterBy,
+    onChangeTheme,
 }
 
 function onInit() {
@@ -326,4 +328,10 @@ function cleanStats(stats) {
         return acc
     }, [])
     return cleanedStats
+}
+
+function onChangeTheme() {
+    document.querySelector('body').classList.toggle('theme')
+    document.querySelector('header').classList.toggle('theme')
+    document.querySelector('.locs-container').classList.toggle('theme')
 }

@@ -11,8 +11,12 @@
 <body>
     <header>
         <h1>TravelTip</h1>
+        <button class="btn-change-theme" onclick="app.onChangeTheme()">Cahnge Theme</button>
+
         <section class="selected-loc">
-            <h2>Location: <span class="loc-name"></span><p class="loc-distance"></p> <span class="loc-rate"></span></h2>
+            <h2>Location: <span class="loc-name"></span>
+                <p class="loc-distance"></p> <span class="loc-rate"></span>
+            </h2>
             <h4 class="loc-address"></h4>
             <button onclick="app.onCopyLoc()">Copy location</button>
             <button onclick="app.onShareLoc()">Share location</button>
@@ -37,7 +41,8 @@
                     <div>
                         <label>
                             Min Rate:
-                            <input name="filter-by-rate" type="range" min="0" max="5" value="0" class="filter-rate-range"
+                            <input name="filter-by-rate" type="range" min="0" max="5" value="0"
+                                class="filter-rate-range"
                                 onchange="this.title=this.value;app.onSetFilterBy({minRate: this.value})" />
                         </label>
                     </div>

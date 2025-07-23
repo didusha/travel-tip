@@ -4,6 +4,10 @@
     min-height: 100vh;
 }
 
+.locs-container.theme{
+    background-color: #E57373;
+}
+
 .loc-list {
     list-style: none;
     padding: 0;
