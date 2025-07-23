@@ -65,7 +65,12 @@ function getById(locId) {
 }
 
 function remove(locId) {
-    return storageService.remove(DB_KEY, locId)
+    //DONE: add confirm
+    // TODO: change to swall module?
+    if (confirm('Remove Location?')) {
+        return storageService.remove(DB_KEY, locId)
+    }
+    return
 }
 
 function save(loc) {
