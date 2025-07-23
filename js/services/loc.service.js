@@ -54,8 +54,9 @@ function query() {
                 locs.sort((p1, p2) => (p1.rate - p2.rate) * gSortBy.rate)
             } else if (gSortBy.name !== undefined) {
                 locs.sort((p1, p2) => p1.name.localeCompare(p2.name) * gSortBy.name)
-            } else if(locs.createdAt !== undefined)
-
+            } else if(gSortBy.createdAt !== undefined){
+                locs.sort((ct1, ct2) => (ct2.createdAt-ct1.createdAt) * gSortBy.createdAt)
+            }
             return locs
         })
 }
@@ -104,7 +105,7 @@ function getLocCountByRateMap() {
 }
 
 function setSortBy(sortBy = {}) {
-    gSortBy = sortBy
+    gSortBy = sortBy    
 }
 
 function _createLocs() {
