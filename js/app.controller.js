@@ -47,7 +47,7 @@ function renderLocs(locs) {
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
                 <span>${loc.name}</span>
-                <span> Distance: ${distance}</span>
+                <span calss="distance"> Distance: ${distance}</span>
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
             <p class="muted">
@@ -178,12 +178,14 @@ function onSelectLoc(locId) {
 function displayLoc(loc) {
     document.querySelector('.loc.active')?.classList?.remove('active')
     document.querySelector(`.loc[data-id="${loc.id}"]`).classList.add('active')
+    const distance = utilService.getDistance(loc.geo, gUserPos)
 
     mapService.panTo(loc.geo)
     mapService.setMarker(loc)
 
     const el = document.querySelector('.selected-loc')
     el.querySelector('.loc-name').innerText = loc.name
+    el.querySelector('.loc-distance').innerText = 'Distance:' + distance
     el.querySelector('.loc-address').innerText = loc.geo.address
     el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
     el.querySelector('[name=loc-copier]').value = window.location
