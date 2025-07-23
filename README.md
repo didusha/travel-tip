@@ -24,6 +24,8 @@ TravelTip is an app that keeps a list of favorite locations
 - Reflected in query params 
 - Copy url to clipboard
 - Share via Web-Share API
+- Show distance from personal location
+- Show statistics
 
 ## Location
 Here is the format of the location object:
