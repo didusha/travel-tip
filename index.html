@@ -77,6 +77,31 @@
             </section>
         </div>
     </main>
+    <dialog>
+        <form method="dialog" class="NewLocation">
+            <h3>Add a Location</h3>
+
+            <label>
+                Location Name:
+                <input type="text" name="location" required />
+            </label>
+            <label>
+                Rating:
+                <select name="rating" required>
+                    <option value="" disabled selected>Select rating</option>
+                    <option value="1">1 ⭐</option>
+                    <option value="2">2 ⭐</option>
+                    <option value="3">3 ⭐</option>
+                    <option value="4">4 ⭐</option>
+                    <option value="5">5 ⭐</option>
+                </select>
+            </label>
+            <div>
+                <button value="cancel">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </dialog>
     <pre class="debug" hidden></pre>
     <div class="user-msg"></div>
     <script type="module" src="js/app.controller.js"></script>
