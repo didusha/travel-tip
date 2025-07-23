@@ -30,7 +30,8 @@ export const locService = {
     save,
     setFilterBy,
     setSortBy,
-    getLocCountByRateMap
+    getLocCountByRateMap,
+    getLocCountByUpdate
 }
 
 function query() {
@@ -54,8 +55,8 @@ function query() {
                 locs.sort((p1, p2) => (p1.rate - p2.rate) * gSortBy.rate)
             } else if (gSortBy.name !== undefined) {
                 locs.sort((p1, p2) => p1.name.localeCompare(p2.name) * gSortBy.name)
-            } else if(gSortBy.createdAt !== undefined){
-                locs.sort((ct1, ct2) => (ct2.createdAt-ct1.createdAt) * gSortBy.createdAt)
+            } else if (gSortBy.createdAt !== undefined) {
+                locs.sort((ct1, ct2) => (ct2.createdAt - ct1.createdAt) * gSortBy.createdAt)
             }
             return locs
         })
@@ -97,6 +98,7 @@ function getLocCountByRateMap() {
                 if (loc.rate > 4) map.high++
                 else if (loc.rate >= 3) map.medium++
                 else map.low++
+
                 return map
             }, { high: 0, medium: 0, low: 0 })
             locCountByRateMap.total = locs.length
@@ -104,8 +106,28 @@ function getLocCountByRateMap() {
         })
 }
 
+function getLocCountByUpdate() {
+    return storageService.query(DB_KEY)
+        .then(locs => {
+            const updatedTime = locs.map(loc => loc.updatedAt)
+
+            const lastUpdated = { today: 0, past: 0, never: 0 }
+            updatedTime.forEach(time => {
+                const now = new Date()
+                const secondsPast = Math.round((now - time) / 1000)
+                const minutesPast = Math.floor(secondsPast / 60)
+                const hoursPast = Math.floor(minutesPast / 60)
+                if (hoursPast < 24) lastUpdated.today++
+                else if (hoursPast > 24) lastUpdated.past++
+                else if (!time) lastUpdated.never++
+            })
+            lastUpdated.total = locs.length
+            return lastUpdated
+        })
+}
+
 function setSortBy(sortBy = {}) {
-    gSortBy = sortBy    
+    gSortBy = sortBy
 }
 
 function _createLocs() {
